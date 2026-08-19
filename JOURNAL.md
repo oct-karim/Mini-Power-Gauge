@@ -58,7 +58,27 @@ Then the nightmare begun... i had problems with the datasheet of the I2C Expande
 
 <div align="center">
 Today i made the PCB Layout,i had some difficulties while routing because the weird footprint of some compnents. But did a good job in the end:
-    <img width="1007" height="801" alt="image" src="https://github.com/user-attachments/assets/efc00dc7-2a8d-4039-94fc-c71cf7c49967" />
+    <img width="1007" height="801" alt="image" src="https://github.com/user-attachments/assets/efc00dc7-2a8d-4039-94fc-c71cf7c49967" />    
+        I started routing the USB-C Section, i didn't have any problem        
+        <img width="852" height="708" alt="image" src="https://github.com/user-attachments/assets/92e496fe-6670-48bd-9871-a4b88df92fe6" />    
+          I choose for a GND pouring because it's good practice to put two vias per decoupling/Bulking capcitor and made a pour for the 5V.
+          Then i made the LED status:    <img width="832" height="574" alt="image" src="https://github.com/user-attachments/assets/e7c1a37f-c076-44ff-9372-41c7b2312141" />     OVFL=Overflow (max voltage/current range or failsafe) OK=Good function of the PCB  SLP=Sleep mode  
+          Then i made the MCU + I2C expander layout     <img width="1005" height="736" alt="image" src="https://github.com/user-attachments/assets/65a6d556-033b-47b1-93a7-cd7a78849744" /> had some problem here i had to make compromise between soldering, density and decoupling signal bridges.
+              Then the bottom part with the ICSP header and the sensor:     <img width="1379" height="336" alt="image" src="https://github.com/user-attachments/assets/6d66b505-c0b1-4d55-b5e2-3ff454bc612e" />
+                  In the end i made the layout for the LCD Display with the dupont connector    
+                      <img width="1202" height="459" alt="image" src="https://github.com/user-attachments/assets/e9f4a513-b23d-4587-9dfc-e1f7aadab1d6" />
+                      I had to make vias bridge for the signal because they crossed. All caused by the weird foorprint of the I2C expander.
+                      This is the final result:     
+      <img width="895" height="873" alt="image" src="https://github.com/user-attachments/assets/39db6a9b-d00a-4799-9564-e774a3e252ca" />    
+      Then i started to make the code. I used C++ and i will uplaod it with a USBasp Uploader (3$ on aliexpress) I searched a lot  on the internet for the libraries and to how to make the failsafes. In the end i'm pretty satisfied. But i think that the firmware needs some refining. That's the end!
+
+                      
+
+
+
+              
+
+
 
 
 
