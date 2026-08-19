@@ -1,4 +1,4 @@
-n <div align="center">
+<div align="center">
 
 #  USB-C PCB Power Gauge
 
@@ -19,18 +19,16 @@ This simple power gauge, controlled by the ATmega328P microcontroller has a volt
 The footprints have been chosen to be easy to solder. And the components are widely available.
 
 ## Features
--Range 0/36V & 0/3.5A
--16x2 Display
--Sleep Mode: Consumes less energy after 30s without mesuring voltage
--Warning LED: Inform the user that the mesurements are reaching the max or a activated failsafe
--LCD Ping: checks if the display is alive or faulty soldering
--AVR Watchdog: prevents the microcontroller to freeze for more than 2 sec
--I2C Failsafe: checks if the  I2C communication is good to go
--Over range Failsafe: if the mesurements are more than 36V or 3.5A it shuts down the sensor.
+-**Range** 0/36V & 0/3.5A    
+-**16x2 Display**   
+-**Sleep Mode**: Consumes less energy after 30s without mesuring voltage    
+-**Warning LED**: Inform the user that the mesurements are reaching the max or a activated failsafe    
+-**LCD Ping**: checks if the display is alive or faulty connection  
+-**AVR Watchdog**: prevents the microcontroller to freeze for more than 2 sec    
+-**I2C Failsafe**: checks if the  I2C communication is good to go    
+-**Over range Failsafe**: if the mesurements are more than 36V or 3.5A it shuts down the sensor.    
 
 ##  Hardware Overview
-
-The system is built around a standard 8-bit AVR and an I2C communication. 
 
 | Component | Function |
 | :--- | :--- |
