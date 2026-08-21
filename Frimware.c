@@ -49,9 +49,8 @@ void setup()
     // FAILSAFE 2: Check INA226
     if (!ina226.init())
     {
-        Serial.println(F("FATAL: INA226 not found."));
+        Serial.println(F("ERROR: INA226 not found."));
         lcd.setCursor(0, 1);
-        lcd.print(F("INA226 ERROR!"));
         digitalWrite(LED_RED_PIN, HIGH);
         while (1)
             ;
@@ -100,7 +99,7 @@ void loop()
             lcd.setCursor(0, 1);
             lcd.print(F("SENSOR SHUTDOWN"));
 
-            Serial.println(F("CRITICAL: Limit reached. INA226 powered down. System halted."));
+            Serial.println(F("Limit reached. Sensor powered down."));
 
             // Blocks system permanently
             while (1)
@@ -128,7 +127,7 @@ void loop()
     }
     else
     {
-        // STANDBY
+        // STANDBY (this should work, but i'm not sure lol)
         if (millis() - lastValidReadTime > STANDBY_TIMEOUT_MS)
         {
             if (!isStandby)
