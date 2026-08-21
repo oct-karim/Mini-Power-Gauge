@@ -35,7 +35,7 @@ void setup()
     Wire.beginTransmission(I2C_LCD_ADDRESS);
     if (Wire.endTransmission() != 0)
     {
-        Serial.println(F("FATAL: LCD (PCF8574AT) not found."));
+        Serial.println(F("ERROR: LCD (PCF8574AT) not found."));
         digitalWrite(LED_RED_PIN, HIGH);
         while (1)
             ;
@@ -55,7 +55,7 @@ void setup()
         while (1)
             ;
     }
-
+//Set shunt resistor
     ina226.setResistorRange(0.02, 3.2);
     ina226.waitUntilConversionCompleted();
     lcd.clear();
@@ -83,13 +83,11 @@ void loop()
             lcd.backlight();
             lcd.clear();
         }
-
         // FAILSAFE 2 Shuts down INA226
         if (busVoltage_V >= 36.0 && current_A > 3.5)
         {
 
             ina226.powerDown();
-
             digitalWrite(LED_RED_PIN, HIGH);
             digitalWrite(LED_GREEN_PIN, LOW);
             digitalWrite(LED_BLUE_PIN, LOW);
@@ -98,10 +96,9 @@ void loop()
             lcd.print(F("OVERLOAD"));
             lcd.setCursor(0, 1);
             lcd.print(F("SENSOR SHUTDOWN"));
-
             Serial.println(F("Limit reached. Sensor powered down."));
 
-            // Blocks system permanently
+            // Blocks system 
             while (1)
             {
                 wdt_reset(); // watchdog alive
