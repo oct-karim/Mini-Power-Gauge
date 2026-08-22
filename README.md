@@ -8,7 +8,8 @@ A simple PCB, functional and efficient. For monitoring current, voltage and powe
 ![Firmware](https://img.shields.io/badge/Firmware-C%2B%2B-blue.svg)
 ![Status](https://img.shields.io/badge/Status-Prototype-orange.svg)
 
-<img width="1176" height="787" alt="image" src="https://github.com/user-attachments/assets/dbdd48a3-2b09-41dd-ab6e-d791dc5ec91e" />
+<img width="962" height="775" alt="image" src="https://github.com/user-attachments/assets/7a5b69e1-df96-4bec-997b-da10a081b172" />
+
 
 
 </div>
