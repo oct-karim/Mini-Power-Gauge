@@ -13,7 +13,7 @@ const uint8_t LED_GREEN_PIN = 9; // PB1
 const uint8_t LED_BLUE_PIN = 10; // PB2
 LiquidCrystal_I2C lcd(I2C_LCD_ADDRESS, 16, 2);
 INA226_WE ina226 = INA226_WE(INA226_ADDRESS);
-// Standby
+// Stby function
 unsigned long lastValidReadTime = 0;
 const unsigned long STANDBY_TIMEOUT_MS = 30000; //
 bool isStandby = false;
@@ -23,7 +23,6 @@ void setup()
     wdt_disable();
     Serial.begin(115200);
     Wire.begin();
-
     pinMode(LED_RED_PIN, OUTPUT);
     pinMode(LED_GREEN_PIN, OUTPUT);
     pinMode(LED_BLUE_PIN, OUTPUT);
@@ -31,20 +30,19 @@ void setup()
     digitalWrite(LED_RED_PIN, LOW);
     digitalWrite(LED_BLUE_PIN, LOW);
 
-    // FAILSAFE 1 Check LCD
+    // FAILSAFE Check LCD
     Wire.beginTransmission(I2C_LCD_ADDRESS);
     if (Wire.endTransmission() != 0)
     {
         Serial.println(F("ERROR: LCD (PCF8574AT) not found."));
         digitalWrite(LED_RED_PIN, HIGH);
-        while (1)
-            ;
+        while (1);
     }
 
     lcd.init();
     lcd.backlight();
     lcd.setCursor(0, 0);
-    lcd.print(F("System Boot..."));
+    lcd.print(F("System Boot"));
 
     // FAILSAFE 2: Check INA226
     if (!ina226.init())
@@ -52,23 +50,20 @@ void setup()
         Serial.println(F("ERROR: INA226 not found."));
         lcd.setCursor(0, 1);
         digitalWrite(LED_RED_PIN, HIGH);
-        while (1)
-            ;
+        while (1);
     }
-//Set shunt resistor
+//shunt resistor
     ina226.setResistorRange(0.02, 3.2);
     ina226.waitUntilConversionCompleted();
     lcd.clear();
     lastValidReadTime = millis();
-
-    // Watchdog
-    wdt_enable(WDTO_2S);
+    wdt_enable(WDTO_2S); // Watchdog
 }
 
 void loop()
 {
     wdt_reset();
-
+    //Calculations
     float busVoltage_V = ina226.getBusVoltage_V();
     float current_A = ina226.getCurrent_mA() / 1000.0;
     bool validMeasurement = (busVoltage_V > 0.5);
@@ -83,10 +78,9 @@ void loop()
             lcd.backlight();
             lcd.clear();
         }
-        // FAILSAFE 2 Shuts down INA226
+        // FAILSAFE Shuts down INA226
         if (busVoltage_V >= 36.0 && current_A > 3.5)
         {
-
             ina226.powerDown();
             digitalWrite(LED_RED_PIN, HIGH);
             digitalWrite(LED_GREEN_PIN, LOW);
@@ -96,22 +90,21 @@ void loop()
             lcd.print(F("OVERLOAD"));
             lcd.setCursor(0, 1);
             lcd.print(F("SENSOR SHUTDOWN"));
-            Serial.println(F("Limit reached. Sensor powered down."));
+            Serial.println(F("Over-Range. Sensor powered down."));
 
             // Blocks system 
             while (1)
             {
-                wdt_reset(); // watchdog alive
+                wdt_reset(); // watchdog 
             }
         }
         else
         {
-            // STATUS_OK
+            // STAT_OK
             digitalWrite(LED_RED_PIN, LOW);
             digitalWrite(LED_GREEN_PIN, HIGH);
             digitalWrite(LED_BLUE_PIN, LOW);
         }
-
         // LCD
         lcd.setCursor(0, 0);
         lcd.print(F("V: "));
