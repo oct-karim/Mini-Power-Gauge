@@ -66,7 +66,12 @@ void loop()
     //Calculations
     float busVoltage_V = ina226.getBusVoltage_V();
     float current_A = ina226.getCurrent_mA() / 1000.0;
-    bool validMeasurement = (busVoltage_V > 0.5);
+    bool validMeasurement; // Hysteresis
+if (isStandby) {
+    validMeasurement = (busVoltage_V > 0.2); // Higher range wake up
+} else {
+    validMeasurement = (busVoltage_V > 0.1); // Lower range to stay awake
+}
 
     if (validMeasurement)
     {
@@ -96,6 +101,7 @@ void loop()
             while (1)
             {
                 wdt_reset(); // watchdog 
+                delay(100);
             }
         }
         else
@@ -115,26 +121,25 @@ void loop()
         lcd.print(current_A * 1000.0, 1);
         lcd.print(F("mA      "));
     }
-    else
+  else
+{
+    // STANDBY 
+    if (millis() - lastValidReadTime > STANDBY_TIMEOUT_MS)
     {
-        // STANDBY (this should work, but i'm not sure lol)
-        if (millis() - lastValidReadTime > STANDBY_TIMEOUT_MS)
+        if (!isStandby)
         {
-            if (!isStandby)
-            {
-                isStandby = true;
-                lcd.noBacklight();
-                lcd.clear();
-                lcd.setCursor(0, 0);
-                lcd.print(F("Standby"));
-                digitalWrite(LED_BLUE_PIN, HIGH);
-                digitalWrite(LED_GREEN_PIN, LOW);
-                digitalWrite(LED_RED_PIN, LOW);
-            }
+            isStandby = true;
+            lcd.noBacklight();
+            lcd.clear();
+            lcd.setCursor(0, 0);
+            lcd.print(F("Standby"));
+            digitalWrite(LED_BLUE_PIN, HIGH);
+            digitalWrite(LED_GREEN_PIN, LOW);
+            digitalWrite(LED_RED_PIN, LOW);
         }
     }
-
+}
     delay(500);
 }
 // Made by oct-karim
-// 19/08/2026    V1.2
+// 19/08/2026    V1.3
