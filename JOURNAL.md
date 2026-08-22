@@ -69,8 +69,9 @@ Today i made the PCB Layout,i had some difficulties while routing because the we
                       <img width="1202" height="459" alt="image" src="https://github.com/user-attachments/assets/e9f4a513-b23d-4587-9dfc-e1f7aadab1d6" />
                       I had to make vias bridge for the signal because they crossed. All caused by the weird foorprint of the I2C expander.
                       This is the final result:     
-      <img width="895" height="873" alt="image" src="https://github.com/user-attachments/assets/39db6a9b-d00a-4799-9564-e774a3e252ca" />    
-      Then i started to make the code. I used C++ and i will uplaod it with a USBasp Uploader (3$ on aliexpress) I searched a lot  on the internet for the libraries and to how to make the failsafes. In the end i'm pretty satisfied. But i think that the firmware needs some refining. That's the end!
+      <img width="883" height="791" alt="image" src="https://github.com/user-attachments/assets/be7d7fdc-e806-48db-9249-011dae1f428d" />
+
+  Then i started to make the code. I used C++ and i will uplaod it with a USBasp Uploader (3$ on aliexpress) I searched a lot  on the internet for the libraries and to how to make the failsafes. In the end i'm pretty satisfied. But i think that the firmware needs some refining. That's the end!
 
                       
 
