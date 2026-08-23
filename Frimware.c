@@ -49,6 +49,7 @@ void setup()
     {
         Serial.println(F("ERROR: INA226 not found."));
         lcd.setCursor(0, 1);
+        lcd.print(F("INA226 FAIL"));
         digitalWrite(LED_RED_PIN, HIGH);
         while (1);
     }
@@ -65,7 +66,8 @@ void loop()
     wdt_reset();
     //Calculations
     float busVoltage_V = ina226.getBusVoltage_V();
-    float current_A = ina226.getCurrent_mA() / 1000.0;
+    float current_A = ina226.getCurrent_mA();
+    float current_A = current_mA / 1000.0; 
     bool validMeasurement; // Hysteresis
 if (isStandby) {
     validMeasurement = (busVoltage_V > 0.2); // Higher range wake up
@@ -84,7 +86,7 @@ if (isStandby) {
             lcd.clear();
         }
         // FAILSAFE Shuts down INA226
-        if (busVoltage_V >= 36.0 && current_A > 3.5)
+        if (busVoltage_V >= 36.0 || current_A > 3.5)
         {
             ina226.powerDown();
             digitalWrite(LED_RED_PIN, HIGH);
@@ -118,7 +120,7 @@ if (isStandby) {
         lcd.print(F("V       "));
         lcd.setCursor(0, 1);
         lcd.print(F("I: "));
-        lcd.print(current_A * 1000.0, 1);
+        lcd.print(current_mA, 1);
         lcd.print(F("mA      "));
     }
   else
