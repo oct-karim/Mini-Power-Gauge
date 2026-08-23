@@ -26,6 +26,7 @@ This journal serves as a complete development log tracking the hardware design, 
 | :---: | :--- | :--- |
 | [<ins>2026-08-18</ins>](#august-18-2026--Schematic-Design-and-datasheet-nightmare) | Schematic Design, PCB Layout and Firmware | 3h |
 | [<ins>2026-08-19</ins>](#august-19-2026--PCB-Layout-and-Firmware) | Schematic Design, PCB Layout and Firmware | 4h |
+| [<ins>2026-08-23</ins>](#august-23-2026--Rerouting) | Remade of the PCB layout| 1h |
 
 ---
 
@@ -71,10 +72,18 @@ Today i made the PCB Layout,i had some difficulties while routing because the we
                       This is the final result:     
       <img width="883" height="791" alt="image" src="https://github.com/user-attachments/assets/be7d7fdc-e806-48db-9249-011dae1f428d" />
 
-  Then i started to make the code. I used C++ and i will uplaod it with a USBasp Uploader (3$ on aliexpress) I searched a lot  on the internet for the libraries and to how to make the failsafes. In the end i'm pretty satisfied. But i think that the firmware needs some refining. That's the end!
+  Then i started to make the code. I used C++ and i will uplaod it with a USBasp Uploader (3$ on aliexpress) I searched a lot  on the internet for the libraries and to how to make the failsafes. In the end i'm pretty satisfied. But i think that the firmware needs some refining. 
 
                       
+# August 23, 2026:  Rerouting
 
+Today i made the PCB design layout more compact and efficient without touching the easy-to-solder footprints. I also added testpoint. This is the final result:    
+    <img width="809" height="854" alt="image" src="https://github.com/user-attachments/assets/11ad04c6-a842-4325-b76f-53a34c35c709" />    
+        This is the final render:     
+          <img width="895" height="922" alt="image" src="https://github.com/user-attachments/assets/5dca3245-7897-4262-bd7a-df231244dd9f" />
+
+
+    
 
 
               
